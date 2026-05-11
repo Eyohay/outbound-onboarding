@@ -1,0 +1,701 @@
+/* ===== Variables ===== */
+.page {
+  --navy: #08101e;
+  --navy-mid: #0d1a2e;
+  --navy-card: #111f35;
+  --blue: #2563eb;
+  --blue-bright: #3b82f6;
+  --orange: #f97316;
+  --orange-dark: #ea6c0a;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --bg-page: #f0f4fa;
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --border-dark: rgba(255, 255, 255, 0.07);
+  --success: #059669;
+  --error: #dc2626;
+
+  min-height: 100vh;
+  background: var(--bg-page);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ===== Header ===== */
+.header {
+  background: var(--navy);
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.headerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logoMark {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: white;
+}
+
+.logoText {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.headerPill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: var(--navy);
+  padding: 80px 32px 90px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37, 99, 235, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.4), transparent);
+}
+
+.heroInner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heroHeadline {
+  font-size: clamp(38px, 5.5vw, 60px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin: 0 0 22px;
+}
+
+.heroSub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ===== Below Hero Strip ===== */
+.belowHero {
+  background: linear-gradient(180deg, #0d1a2e 0%, #111f35 100%);
+  padding: 28px 32px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.belowHeroTextWhite {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ===== Content ===== */
+.content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+
+/* ===== Section title bar ===== */
+.sectionTitleBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.sectionTitleNum {
+  width: 28px;
+  height: 28px;
+  background: var(--blue);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+
+.sectionTitleText {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===== Video Section ===== */
+.videoSection {
+  margin-bottom: 56px;
+}
+
+.videoLabel {
+  background: white;
+  border-radius: 14px 14px 0 0;
+  padding: 28px 32px 24px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+}
+
+.videoLabelText {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.videoEmbed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0 0 14px 14px;
+  border: 1px solid var(--border);
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ===== Above Form ===== */
+.aboveForm {
+  margin-bottom: 28px;
+}
+
+.aboveFormInner {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.aboveFormInner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+}
+
+.aboveFormTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.4px;
+  margin: 0 0 4px;
+}
+
+.aboveFormSub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.timeBadge {
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.timeBadgeNum {
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+}
+
+.timeBadgeLabel {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Form Card ===== */
+.formCard {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(8, 16, 30, 0.12), 0 4px 16px rgba(8, 16, 30, 0.06);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ===== Progress Bar ===== */
+.progressBar {
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border);
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+}
+
+.progressSteps {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.progressStep {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.progressStepDot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.progressStepDot.active {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.progressStepDot.done {
+  border-color: var(--success);
+  background: var(--success);
+  color: white;
+}
+
+.progressStepLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: color 0.3s;
+  margin-left: 8px;
+}
+
+.progressStepLabel.active { color: var(--blue); }
+.progressStepLabel.done   { color: var(--success); }
+
+.progressConnector {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  margin: 0 12px;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.progressConnector.done { background: var(--success); }
+
+/* ===== Section Intro ===== */
+.sectionIntro {
+  padding: 56px 44px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.sectionBadge {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  color: var(--blue);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  margin-bottom: 20px;
+}
+
+.sectionIntroTitle {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  margin: 0 0 14px;
+  color: #0f172a;
+}
+
+.sectionIntroText {
+  font-size: 16px;
+  color: #475569;
+  max-width: 460px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+
+.startBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: white;
+  border: none;
+  padding: 15px 34px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
+  transition: all 0.2s;
+  letter-spacing: -0.2px;
+}
+
+.startBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.45);
+}
+
+.startBtnArrow {
+  font-size: 18px;
+}
+
+/* ===== Questions Panel ===== */
+.questionsPanel {
+  padding: 36px 40px 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sectionNumber {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #0d1a2e, #1e3a5f);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #0f172a;
+  margin: 0;
+}
+
+.sectionSubtitle {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 1px 0 0;
+}
+
+/* ===== Question Items ===== */
+.questionItem {
+  margin-bottom: 26px;
+}
+
+.questionLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.questionHint {
+  display: block;
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+.questionInput,
+.questionTextarea {
+  width: 100%;
+  border: 1.5px solid #e8edf4;
+  border-radius: 10px;
+  padding: 12px 15px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1e293b;
+  background: #f9fafb;
+  transition: all 0.2s;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.questionInput::placeholder,
+.questionTextarea::placeholder {
+  color: #94a3b8;
+}
+
+.questionInput:focus,
+.questionTextarea:focus {
+  border-color: var(--blue);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.questionTextarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.65;
+}
+
+.questionRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ===== Form Nav ===== */
+.formNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px 28px;
+  margin-top: 24px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.navSpacer {
+  flex: 1;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: #64748b;
+  border: 1.5px solid var(--border);
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background: #f8fafc;
+  border-color: #c8d5e8;
+  color: #1e293b;
+}
+
+.nextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s;
+}
+
+.nextBtn:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+.submitWrap {
+  text-align: right;
+}
+
+.submitHint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: white;
+  border: none;
+  padding: 13px 32px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
+  transition: all 0.2s;
+}
+
+.submitBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.45);
+}
+
+.submitBtn:disabled,
+.nextBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== Error Banner ===== */
+.errorBanner {
+  margin: 0 40px 16px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 10px;
+  color: var(--error);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ===== Success Screen ===== */
+.successScreen {
+  padding: 72px 44px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #d1fae5, #6ee7b7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+  font-size: 36px;
+  box-shadow: 0 8px 32px rgba(5, 150, 105, 0.2);
+}
+
+.successTitle {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  margin: 0 0 14px;
+  color: #0f172a;
+}
+
+.successText {
+  font-size: 16px;
+  color: #475569;
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .hero { padding: 60px 20px 70px; }
+  .belowHero { padding: 20px; }
+  .content { padding: 40px 16px 80px; }
+  .videoLabel { padding: 20px; }
+  .sectionIntro { padding: 40px 24px; }
+  .questionsPanel { padding: 28px 24px 0; }
+  .formNav { padding: 20px 24px 24px; }
+  .questionRow { grid-template-columns: 1fr; }
+  .progressStepLabel { display: none; }
+  .aboveFormInner { flex-direction: column; text-align: center; }
+  .errorBanner { margin: 0 24px 16px; }
+  .successScreen { padding: 48px 24px; }
+}
