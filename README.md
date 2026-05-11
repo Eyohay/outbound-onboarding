@@ -1,10 +1,11 @@
 # Outbound Onboarding
 
-Standalone client onboarding page for Outbound Consulting. Clients land here after booking their kickoff call, watch two Vimeo videos, and fill out a 12-question intake form.
+Standalone client onboarding page for Outbound Consulting. This is **step 2** of the client journey:
 
-On submit, the form:
-1. Saves all answers to an Airtable base
-2. Sends the client a branded kickoff confirmation email via Brevo
+1. **Calendly booking** — client books their kickoff call and receives a confirmation email (see `kickoff-email/kickoff-confirmation.html`) with a CTA button linking here
+2. **This page** — client watches two Vimeo videos and fills out a 12-question intake form
+
+On submit, the form does one thing only: saves all answers to Airtable. No email is sent. The in-page success screen confirms completion to the client.
 
 **Live URL:** https://onboarding.outbound.consulting  
 **Stack:** Next.js 14, plain JavaScript, CSS Modules  
@@ -17,7 +18,7 @@ On submit, the form:
 ```
 outbound-onboarding/
 ├── kickoff-email/
-│   └── kickoff-confirmation.html   # Source of truth for the confirmation email
+│   └── kickoff-confirmation.html   # Booking confirmation email — paste into Calendly, not used by the API
 ├── app/
 │   ├── layout.js                   # Bare root layout (html/body wrapper only)
 │   ├── onboarding/
@@ -26,8 +27,8 @@ outbound-onboarding/
 │   │   └── onboarding.module.css   # All styles, scoped to the onboarding page
 │   └── api/
 │       └── onboarding/
-│           └── route.js            # POST handler: Airtable write + Brevo email send
-├── next.config.js                  # outputFileTracingIncludes so HTML file ships with API route
+│           └── route.js            # POST handler: saves form data to Airtable, returns success
+├── next.config.js
 ├── package.json
 └── .gitignore
 ```
@@ -43,7 +44,7 @@ cd outbound-onboarding
 npm install
 ```
 
-Create a `.env.local` file in the project root with all five env vars (see below). Then:
+Create a `.env.local` file in the project root with the three Airtable env vars (see below). Then:
 
 ```bash
 npm run dev
@@ -51,32 +52,31 @@ npm run dev
 
 The onboarding page is at http://localhost:3000/onboarding
 
-Airtable and Brevo calls will fire for real in local dev if env vars are set. To avoid writing test data to the live Airtable base, either use a separate dev base or leave `AIRTABLE_API_KEY` empty — the form will show an error on submit but the UI still works.
+Airtable writes fire for real in local dev if env vars are set. To avoid writing test data to the live base, either use a separate dev base or leave `AIRTABLE_API_KEY` empty — the form will show an error on submit but the UI still works.
 
 ---
 
 ## Environment variables
 
-All five are required in production. Set them in Vercel → Project Settings → Environment Variables.
+Three variables are required in production. Set them in Vercel → Project Settings → Environment Variables.
 
 | Variable | What it is | Where to get it |
 |---|---|---|
 | `AIRTABLE_API_KEY` | Personal access token with `data.records:write` scope | airtable.com/create/tokens → create token → scope to the Onboarding base |
 | `AIRTABLE_BASE_ID` | The `appXXXXXXXXXX` ID from the Airtable base URL | Open the base → copy the `app...` segment from the URL bar |
 | `AIRTABLE_TABLE_NAME` | Name of the table inside the base | Must be `Onboarding` (or whatever you named it — must match exactly) |
-| `BREVO_API_KEY` | Brevo transactional email API key | app.brevo.com → Settings → API Keys → Generate |
-| `BREVO_SENDER_EMAIL` | The verified sender address that appears in the From field | Must be verified in Brevo → Senders & IPs → Senders before use |
+
+No Brevo credentials are needed here. The kickoff confirmation email is sent by Calendly, not by this app.
 
 ---
 
 ## How to edit the kickoff email
 
-The email HTML lives in **`kickoff-email/kickoff-confirmation.html`**. This is the single source of truth — the API route reads it from disk on every request, so any change you make here is live after the next deploy.
+The email HTML lives in **`kickoff-email/kickoff-confirmation.html`**. This file is the source of truth — edit it here, then re-paste the updated HTML into Calendly's confirmation email editor.
 
-- `{{name}}` is the only template variable. It's replaced with the client's first name at send time.
-- The CTA button URL is an `<a href="...">` on the orange button near the bottom of the body. Find it and update it if the production URL ever changes.
-- To preview the email, open the HTML file directly in a browser. It renders accurately because it uses fully inline styles.
-- Do not move the file or rename it without updating the path in `app/api/onboarding/route.js` and the `outputFileTracingIncludes` entry in `next.config.js`.
+- `{{name}}` in the greeting is a placeholder — replace it with Calendly's first-name variable (`{{invitee_first_name}}`) when pasting into Calendly.
+- The CTA button URL is an `<a href="...">` on the orange button near the bottom of the body. It points to `https://onboarding.outbound.consulting`. Update it here if the URL ever changes, then re-paste into Calendly.
+- To preview the email before pasting, open the HTML file directly in a browser. It renders accurately because it uses fully inline styles.
 
 ---
 

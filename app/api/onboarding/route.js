@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 
 export async function POST(request) {
   const data = await request.json();
@@ -57,33 +55,6 @@ export async function POST(request) {
   }
 
   const result = await airtableRes.json();
-
-  if (data.email && process.env.BREVO_API_KEY) {
-    const firstName = (data.name || "").split(" ")[0] || "there";
-
-    const htmlTemplate = fs.readFileSync(
-      path.join(process.cwd(), "kickoff-email", "kickoff-confirmation.html"),
-      "utf8"
-    );
-    const htmlContent = htmlTemplate.replace(/\{\{name\}\}/g, firstName);
-
-    await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "api-key": process.env.BREVO_API_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sender: {
-          name: "Outbound Consulting",
-          email: process.env.BREVO_SENDER_EMAIL || "hello@outbound.consulting",
-        },
-        to: [{ email: data.email, name: data.name || "" }],
-        subject: "Your kickoff call is booked — one thing to do before we talk",
-        htmlContent,
-      }),
-    }).catch((err) => console.error("Brevo send error:", err));
-  }
 
   return NextResponse.json({ success: true, id: result.id });
 }
