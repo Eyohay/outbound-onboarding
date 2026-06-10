@@ -91,7 +91,7 @@ function Section1Questions({ data, onChange }) {
   return (
     <>
       <div className={s.questionItem}>
-        <label className={s.questionLabel}>Q1 — What's your full name and company name?</label>
+        <label className={s.questionLabel}>Q1 — What&apos;s your full name and company name?</label>
         <div className={s.questionRow}>
           <input className={s.questionInput} type="text" placeholder="Your full name" value={data.name} onChange={(e) => onChange("name", e.target.value)} />
           <input className={s.questionInput} type="text" placeholder="Company name" value={data.company} onChange={(e) => onChange("company", e.target.value)} />
@@ -101,7 +101,7 @@ function Section1Questions({ data, onChange }) {
 
       <div className={s.questionItem}>
         <label className={s.questionLabel}>Q2 — What does your business do, in two sentences or less?</label>
-        <span className={s.questionHint}>Write it the way you'd explain it to someone you just met at a conference. No jargon.</span>
+        <span className={s.questionHint}>Write it the way you&apos;d explain it to someone you just met at a conference. No jargon.</span>
         <textarea className={s.questionTextarea} placeholder="We help [who] achieve [what] by [how]…" value={data.q2} onChange={(e) => onChange("q2", e.target.value)} />
       </div>
 
@@ -119,7 +119,7 @@ function Section1Questions({ data, onChange }) {
 
       <div className={s.questionItem}>
         <label className={s.questionLabel}>Q5 — What are the top 3 obstacles standing between your client and that outcome?</label>
-        <span className={s.questionHint}>What gets in the way — before they find you, or even after they've hired you?</span>
+        <span className={s.questionHint}>What gets in the way — before they find you, or even after they&apos;ve hired you?</span>
         <textarea className={s.questionTextarea} style={{ minHeight: 130 }} placeholder={"1. …\n2. …\n3. …"} value={data.q5} onChange={(e) => onChange("q5", e.target.value)} />
       </div>
     </>
@@ -137,7 +137,7 @@ function Section2Questions({ data, onChange }) {
 
       <div className={s.questionItem}>
         <label className={s.questionLabel}>Q7 — What makes you genuinely different from competitors?</label>
-        <span className={s.questionHint}>Be specific. Avoid "we care more" or "we have 20 years of experience." What can you do that others can't — or won't?</span>
+        <span className={s.questionHint}>Be specific. Avoid &quot;we care more&quot; or &quot;we have 20 years of experience.&quot; What can you do that others can&apos;t — or won&apos;t?</span>
         <textarea className={s.questionTextarea} placeholder="What's the honest, specific answer here…" value={data.q7} onChange={(e) => onChange("q7", e.target.value)} />
       </div>
 
@@ -148,8 +148,8 @@ function Section2Questions({ data, onChange }) {
       </div>
 
       <div className={s.questionItem}>
-        <label className={s.questionLabel}>Q9 — What is the most recognized client or brand you've worked with?</label>
-        <span className={s.questionHint}>Even if it's under NDA, you can note the industry and size.</span>
+        <label className={s.questionLabel}>Q9 — What is the most recognized client or brand you&apos;ve worked with?</label>
+        <span className={s.questionHint}>Even if it&apos;s under NDA, you can note the industry and size.</span>
         <textarea className={s.questionTextarea} style={{ minHeight: 80 }} placeholder="Name or describe them…" value={data.q9} onChange={(e) => onChange("q9", e.target.value)} />
       </div>
     </>
@@ -161,22 +161,113 @@ function Section3Questions({ data, onChange }) {
     <>
       <div className={s.questionItem}>
         <label className={s.questionLabel}>Q10 — What is the specific offer or service you want to lead with in your outreach?</label>
-        <span className={s.questionHint}>This is your opening line — what's the one thing you want prospects to hear first? It doesn't have to be your full service.</span>
+        <span className={s.questionHint}>This is your opening line — what&apos;s the one thing you want prospects to hear first? It doesn&apos;t have to be your full service.</span>
         <textarea className={s.questionTextarea} placeholder="e.g. A free [audit / session / strategy call] that delivers [specific value]…" value={data.q10} onChange={(e) => onChange("q10", e.target.value)} />
       </div>
 
       <div className={s.questionItem}>
         <label className={s.questionLabel}>Q11 — How could we make your offer stronger or easier to say yes to?</label>
-        <span className={s.questionHint}>Think: guarantees, free trials, risk reversal, speed, bonuses. What would make a skeptical prospect think "I'd be an idiot not to try this"?</span>
+        <span className={s.questionHint}>Think: guarantees, free trials, risk reversal, speed, bonuses. What would make a skeptical prospect think &quot;I&apos;d be an idiot not to try this&quot;?</span>
         <textarea className={s.questionTextarea} placeholder="What risk-reversal or guarantee could work here…" value={data.q11} onChange={(e) => onChange("q11", e.target.value)} />
       </div>
 
       <div className={s.questionItem}>
         <label className={s.questionLabel}>Q12 — Is there anything else your launch specialist should know before your kickoff call?</label>
-        <span className={s.questionHint}>Anything unusual about your market, a past campaign that didn't work, a competitor you're often compared to, or a type of client you don't want.</span>
+        <span className={s.questionHint}>Anything unusual about your market, a past campaign that didn&apos;t work, a competitor you&apos;re often compared to, or a type of client you don&apos;t want.</span>
         <textarea className={s.questionTextarea} placeholder="Anything that would help your launch specialist show up fully prepared…" value={data.q12} onChange={(e) => onChange("q12", e.target.value)} />
       </div>
     </>
+  );
+}
+
+function UpsellScreen({ submissionId }) {
+  const [interested, setInterested] = useState(false);
+  const [interestLoading, setInterestLoading] = useState(false);
+
+  const handleInterest = async () => {
+    setInterestLoading(true);
+    try {
+      await fetch("/api/onboarding/interest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: submissionId }),
+      });
+    } catch {
+      // swallow — network failure still shows confirmation
+    } finally {
+      setInterested(true);
+      setInterestLoading(false);
+    }
+  };
+
+  return (
+    <div className={s.upsellScreen}>
+      <div className={s.upsellHero}>
+        <img
+          className={s.upsellLogo}
+          src="https://lh3.googleusercontent.com/JA1aszEWNBpfzm8wgMBlvL4Vz-u-8GWLUStjnLp6FdPrIgLW-_miKNuwy-JiQHO-zg3BnIkvpE7S-LpIGHki1uLrIT5NFhHRAWIt=s0"
+          alt="Outbound Consulting"
+        />
+        <div className={s.upsellCheck}>✓</div>
+        <h2 className={s.upsellHeroTitle}>Your Launch Blueprint is in.</h2>
+        <p className={s.upsellHeroText}>
+          Your launch specialist will read every answer before your kickoff call. You&apos;re all set.
+        </p>
+      </div>
+
+      <div className={s.upsellCardWrap}>
+        <div className={s.upsellCard}>
+          <span className={s.upsellEyebrow}>Optional add-on</span>
+          <h3 className={s.upsellTitle}>Want to double your outreach?</h3>
+          <p className={s.upsellLead}>
+            Right now your campaign runs from a single LinkedIn account.{" "}
+            <strong>Double Outreach adds a second</strong> — two profiles prospecting your market
+            side by side, so you start twice as many conversations with your ideal clients every week.
+          </p>
+          <ul className={s.upsellPoints}>
+            <li className={s.upsellPoint}>
+              <span className={s.upsellTick}>✓</span>
+              A second LinkedIn account, fully managed by your team
+            </li>
+            <li className={s.upsellPoint}>
+              <span className={s.upsellTick}>✓</span>
+              2× the daily outreach volume, same campaign
+            </li>
+            <li className={s.upsellPoint}>
+              <span className={s.upsellTick}>✓</span>
+              Same targeting and messaging — double the surface area
+            </li>
+          </ul>
+
+          <a
+            className={s.upsellCtaPrimary}
+            href="https://outbound.consulting/double-outreach/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            See how Double Outreach works →
+          </a>
+
+          {interested ? (
+            <div className={s.upsellConfirm}>
+              Done — your specialist will walk you through it on your call.
+            </div>
+          ) : (
+            <button
+              className={s.upsellCtaSecondary}
+              onClick={handleInterest}
+              disabled={interestLoading}
+            >
+              {interestLoading ? "One sec…" : "Have my specialist break it down on my call"}
+            </button>
+          )}
+
+          <p className={s.upsellOptout}>Not now? No problem — we&apos;ll see you on your kickoff call.</p>
+        </div>
+
+        <p className={s.upsellFoot}>Outbound Consulting</p>
+      </div>
+    </div>
   );
 }
 
@@ -192,6 +283,7 @@ export default function OnboardingPage() {
   const [formData, setFormData] = useState(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [submissionId, setSubmissionId] = useState(null);
 
   const updateField = (key, val) => setFormData((prev) => ({ ...prev, [key]: val }));
   const goNext = () => setStep((s) => s + 1);
@@ -207,6 +299,8 @@ export default function OnboardingPage() {
         body: JSON.stringify(formData),
       });
       if (!res.ok) throw new Error("Submission failed");
+      const body = await res.json();
+      setSubmissionId(body.id ?? null);
       setStep(6);
     } catch {
       setError("Something went wrong submitting your form. Please try again, or email us directly.");
@@ -219,18 +313,6 @@ export default function OnboardingPage() {
     if (step === 0) return <SectionIntro section={SECTIONS[0]} onStart={goNext} />;
     if (step === 2) return <SectionIntro section={SECTIONS[1]} onStart={goNext} />;
     if (step === 4) return <SectionIntro section={SECTIONS[2]} onStart={goNext} />;
-
-    if (step === 6) {
-      return (
-        <div className={s.successScreen}>
-          <div className={s.successIcon}>✓</div>
-          <h2 className={s.successTitle}>You're all set.</h2>
-          <p className={s.successText}>
-            Your launch specialist has everything they need. Keep an eye on your inbox — we'll be in touch shortly to confirm your kickoff call details.
-          </p>
-        </div>
-      );
-    }
 
     const sectionIdx = SECTION_FOR_STEP[step];
     const section = SECTIONS[sectionIdx];
@@ -274,82 +356,92 @@ export default function OnboardingPage() {
   const showProgress = step >= 0 && step <= 5;
 
   return (
-    <div className={s.page}>
-      <header className={s.header}>
-        <div className={s.headerInner}>
-          <a href="https://outbound.consulting" className={s.logo} target="_blank" rel="noopener noreferrer">
-            <div className={s.logoMark}>O</div>
-            <span className={s.logoText}>Outbound Consulting</span>
-          </a>
-          <span className={s.headerPill}>Client Onboarding</span>
-        </div>
-      </header>
+    <div className={s.page} style={step === 6 ? { background: "#f7f6f3" } : undefined}>
+      {step < 6 && (
+        <>
+          <header className={s.header}>
+            <div className={s.headerInner}>
+              <a href="https://outbound.consulting" className={s.logo} target="_blank" rel="noopener noreferrer">
+                <div className={s.logoMark}>O</div>
+                <span className={s.logoText}>Outbound Consulting</span>
+              </a>
+              <span className={s.headerPill}>Client Onboarding</span>
+            </div>
+          </header>
 
-      <section className={s.hero}>
-        <div className={s.heroInner}>
-          <h1 className={s.heroHeadline}>Let's build something<br />great together.</h1>
-          <p className={s.heroSub}>
-            Before your kickoff call, we need about 8 minutes from you. The more we know going in, the better your first campaign will be.
-          </p>
-        </div>
-      </section>
+          <section className={s.hero}>
+            <div className={s.heroInner}>
+              <h1 className={s.heroHeadline}>Let&apos;s build something<br />great together.</h1>
+              <p className={s.heroSub}>
+                Before your kickoff call, we need about 8 minutes from you. The more we know going in, the better your first campaign will be.
+              </p>
+            </div>
+          </section>
 
-      <div className={s.belowHero}>
-        <p className={s.belowHeroTextWhite}>
-          Watch the two short videos below, then fill out the form. Your launch specialist will review everything before your call so we can skip the basics and get straight to strategy.
-        </p>
-      </div>
-
-      <main className={s.content}>
-        <div className={s.videoSection}>
-          <div className={s.sectionTitleBar}>
-            <div className={s.sectionTitleNum}>1</div>
-            <span className={s.sectionTitleText}>Watch first</span>
-          </div>
-          <div className={s.videoLabel}>
-            <p className={s.videoLabelText}>
-              Hey — welcome to Outbound Consulting. Really glad you're here. Before your kickoff call, we put together a short form that helps our team show up prepared. It takes about 8 minutes, and I promise it's worth it — the more specific you are, the better your first campaign is going to be.
-              <br /><br />
-              Watch our welcome video below — it'll set the stage for everything that follows.
+          <div className={s.belowHero}>
+            <p className={s.belowHeroTextWhite}>
+              Watch the two short videos below, then fill out the form. Your launch specialist will review everything before your call so we can skip the basics and get straight to strategy.
             </p>
           </div>
-          <VideoEmbed src="https://player.vimeo.com/video/1190113576?h=e9a39981b9" label="Welcome video" />
-        </div>
+        </>
+      )}
 
-        <div className={s.videoSection}>
-          <div className={s.sectionTitleBar}>
-            <div className={s.sectionTitleNum}>2</div>
-            <span className={s.sectionTitleText}>Watch next</span>
-          </div>
-          <div className={s.videoLabel}>
-            <p className={s.videoLabelText}>
-              The form you're about to fill out uses a framework called the $100M Offer — it was developed by Alex Hormozi and it's one of the best tools we've found for understanding what makes a business worth talking about.
-              <br /><br />
-              Don't overthink it. Just be honest and specific. Your launch specialist is going to read every word of this before your call — the more you give them, the more prepared they'll be, and the faster we can get your campaigns performing. Eight minutes. Let's go.
-            </p>
-          </div>
-          <VideoEmbed src="https://player.vimeo.com/video/1190114117?h=5d976ac606" label="$100M Offer framework explanation video" />
-        </div>
-
+      <main className={step === 6 ? s.upsellContent : s.content}>
         {step < 6 && (
-          <div className={s.aboveForm}>
-            <div className={s.aboveFormInner}>
-              <div>
-                <p className={s.aboveFormTitle}>Ready? Let's do this.</p>
-                <p className={s.aboveFormSub}>Answer as specifically as you can — vague answers lead to generic campaigns. Specific answers lead to meetings.</p>
+          <>
+            <div className={s.videoSection}>
+              <div className={s.sectionTitleBar}>
+                <div className={s.sectionTitleNum}>1</div>
+                <span className={s.sectionTitleText}>Watch first</span>
               </div>
-              <div className={s.timeBadge}>
-                <div className={s.timeBadgeNum}>8</div>
-                <div className={s.timeBadgeLabel}>minutes</div>
+              <div className={s.videoLabel}>
+                <p className={s.videoLabelText}>
+                  Hey — welcome to Outbound Consulting. Really glad you&apos;re here. Before your kickoff call, we put together a short form that helps our team show up prepared. It takes about 8 minutes, and I promise it&apos;s worth it — the more specific you are, the better your first campaign is going to be.
+                  <br /><br />
+                  Watch our welcome video below — it&apos;ll set the stage for everything that follows.
+                </p>
+              </div>
+              <VideoEmbed src="https://player.vimeo.com/video/1190113576?h=e9a39981b9" label="Welcome video" />
+            </div>
+
+            <div className={s.videoSection}>
+              <div className={s.sectionTitleBar}>
+                <div className={s.sectionTitleNum}>2</div>
+                <span className={s.sectionTitleText}>Watch next</span>
+              </div>
+              <div className={s.videoLabel}>
+                <p className={s.videoLabelText}>
+                  The form you&apos;re about to fill out uses a framework called the $100M Offer — it was developed by Alex Hormozi and it&apos;s one of the best tools we&apos;ve found for understanding what makes a business worth talking about.
+                  <br /><br />
+                  Don&apos;t overthink it. Just be honest and specific. Your launch specialist is going to read every word of this before your call — the more you give them, the more prepared they&apos;ll be, and the faster we can get your campaigns performing. Eight minutes. Let&apos;s go.
+                </p>
+              </div>
+              <VideoEmbed src="https://player.vimeo.com/video/1190114117?h=5d976ac606" label="$100M Offer framework explanation video" />
+            </div>
+
+            <div className={s.aboveForm}>
+              <div className={s.aboveFormInner}>
+                <div>
+                  <p className={s.aboveFormTitle}>Ready? Let&apos;s do this.</p>
+                  <p className={s.aboveFormSub}>Answer as specifically as you can — vague answers lead to generic campaigns. Specific answers lead to meetings.</p>
+                </div>
+                <div className={s.timeBadge}>
+                  <div className={s.timeBadgeNum}>8</div>
+                  <div className={s.timeBadgeLabel}>minutes</div>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
 
-        <div className={s.formCard}>
-          {showProgress && <ProgressBar step={step} />}
-          {renderFormContent()}
-        </div>
+        {step === 6 ? (
+          <UpsellScreen submissionId={submissionId} />
+        ) : (
+          <div className={s.formCard}>
+            {showProgress && <ProgressBar step={step} />}
+            {renderFormContent()}
+          </div>
+        )}
       </main>
     </div>
   );

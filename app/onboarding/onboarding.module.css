@@ -1,12 +1,10 @@
 /* ===== Variables ===== */
 .page {
-  --navy: #08101e;
-  --navy-mid: #0d1a2e;
-  --navy-card: #111f35;
-  --blue: #2563eb;
-  --blue-bright: #3b82f6;
-  --orange: #f97316;
-  --orange-dark: #ea6c0a;
+  --navy:        #1a1a2e;
+  --navy-mid:    #2d2d50;
+  --navy-card:   #232340;
+  --orange:      #f26522;
+  --orange-dark: #d4541a;
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #94a3b8;
@@ -53,7 +51,7 @@
 .logoMark {
   width: 30px;
   height: 30px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -95,7 +93,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37, 99, 235, 0.22) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(242, 101, 34, 0.22) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -106,7 +104,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(242, 101, 34, 0.4), transparent);
 }
 
 .heroInner {
@@ -136,7 +134,7 @@
 
 /* ===== Below Hero Strip ===== */
 .belowHero {
-  background: linear-gradient(180deg, #0d1a2e 0%, #111f35 100%);
+  background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-card) 100%);
   padding: 28px 32px;
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -157,6 +155,13 @@
   padding: 60px 24px 100px;
 }
 
+/* ===== Upsell content wrapper (step 6) ===== */
+.upsellContent {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 56px;
+}
+
 /* ===== Section title bar ===== */
 .sectionTitleBar {
   display: flex;
@@ -168,7 +173,7 @@
 .sectionTitleNum {
   width: 28px;
   height: 28px;
-  background: var(--blue);
+  background: var(--orange);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -242,7 +247,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(242, 101, 34, 0.5), transparent);
 }
 
 .aboveFormTitle {
@@ -260,8 +265,8 @@
 }
 
 .timeBadge {
-  background: rgba(37, 99, 235, 0.15);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(242, 101, 34, 0.15);
+  border: 1px solid rgba(242, 101, 34, 0.2);
   border-radius: 10px;
   padding: 10px 18px;
   text-align: center;
@@ -329,10 +334,10 @@
 }
 
 .progressStepDot.active {
-  border-color: var(--blue);
-  background: var(--blue);
+  border-color: var(--orange);
+  background: var(--orange);
   color: white;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 4px rgba(242, 101, 34, 0.12);
 }
 
 .progressStepDot.done {
@@ -350,7 +355,7 @@
   margin-left: 8px;
 }
 
-.progressStepLabel.active { color: var(--blue); }
+.progressStepLabel.active { color: var(--orange); }
 .progressStepLabel.done   { color: var(--success); }
 
 .progressConnector {
@@ -373,9 +378,9 @@
 
 .sectionBadge {
   display: inline-block;
-  background: rgba(37, 99, 235, 0.06);
-  border: 1px solid rgba(37, 99, 235, 0.15);
-  color: var(--blue);
+  background: rgba(242, 101, 34, 0.06);
+  border: 1px solid rgba(242, 101, 34, 0.15);
+  color: var(--orange);
   border-radius: 100px;
   font-size: 11px;
   font-weight: 700;
@@ -405,7 +410,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #f97316, #ef4444);
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
   color: white;
   border: none;
   padding: 15px 34px;
@@ -414,14 +419,14 @@
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 4px 20px rgba(242, 101, 34, 0.35);
   transition: all 0.2s;
   letter-spacing: -0.2px;
 }
 
 .startBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.45);
+  box-shadow: 0 6px 24px rgba(242, 101, 34, 0.45);
 }
 
 .startBtnArrow {
@@ -446,7 +451,7 @@
 .sectionNumber {
   width: 38px;
   height: 38px;
-  background: linear-gradient(135deg, #0d1a2e, #1e3a5f);
+  background: linear-gradient(135deg, var(--navy-card), var(--navy-mid));
   color: white;
   border-radius: 10px;
   display: flex;
@@ -515,9 +520,9 @@
 
 .questionInput:focus,
 .questionTextarea:focus {
-  border-color: var(--blue);
+  border-color: var(--orange);
   background: white;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.08);
 }
 
 .questionTextarea {
@@ -572,7 +577,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--blue);
+  background: var(--orange);
   color: white;
   border: none;
   padding: 13px 28px;
@@ -581,13 +586,13 @@
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 16px rgba(242, 101, 34, 0.3);
   transition: all 0.2s;
 }
 
 .nextBtn:hover {
-  background: #1d4ed8;
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  background: var(--orange-dark);
+  box-shadow: 0 6px 20px rgba(242, 101, 34, 0.4);
   transform: translateY(-1px);
 }
 
@@ -605,7 +610,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #f97316, #ef4444);
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
   color: white;
   border: none;
   padding: 13px 32px;
@@ -614,13 +619,13 @@
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 4px 20px rgba(242, 101, 34, 0.35);
   transition: all 0.2s;
 }
 
 .submitBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.45);
+  box-shadow: 0 6px 24px rgba(242, 101, 34, 0.45);
 }
 
 .submitBtn:disabled,
@@ -642,40 +647,217 @@
   line-height: 1.5;
 }
 
-/* ===== Success Screen ===== */
-.successScreen {
-  padding: 72px 44px;
-  text-align: center;
+/* ===== Upsell Screen (step 6) ===== */
+.upsellScreen {
+  background: #f7f6f3;
+  border-radius: 16px;
+  overflow: hidden;
   animation: fadeIn 0.4s ease;
 }
 
-.successIcon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #d1fae5, #6ee7b7);
+.upsellHero {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% -10%, rgba(242, 101, 34, 0.22) 0%, transparent 60%),
+    linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+  padding: 30px 36px 48px;
+  text-align: center;
+  color: #fff;
+}
+
+.upsellLogo {
+  display: block;
+  margin: 0 auto 36px;
+  width: 180px;
+  max-width: 60%;
+  height: auto;
+}
+
+.upsellCheck {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
+  background: linear-gradient(135deg, #3fae57, #2e7d32);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 28px;
-  font-size: 36px;
-  box-shadow: 0 8px 32px rgba(5, 150, 105, 0.2);
-}
-
-.successTitle {
+  margin: 0 auto 22px;
   font-size: 30px;
-  font-weight: 900;
-  letter-spacing: -0.8px;
-  margin: 0 0 14px;
-  color: #0f172a;
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(46, 125, 50, 0.35);
 }
 
-.successText {
+.upsellHeroTitle {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  line-height: 1.12;
+  margin: 0 0 12px;
+}
+
+.upsellHeroText {
   font-size: 16px;
-  color: #475569;
-  max-width: 440px;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 500;
+  max-width: 420px;
   margin: 0 auto;
-  line-height: 1.7;
+}
+
+.upsellCardWrap {
+  padding: 0 24px 40px;
+  margin-top: -26px;
+  position: relative;
+}
+
+.upsellCard {
+  background: #fff;
+  border: 1px solid #e7e5e0;
+  border-radius: 18px;
+  padding: 38px 36px 34px;
+  box-shadow: 0 18px 50px rgba(26, 26, 46, 0.10);
+}
+
+.upsellEyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(242, 101, 34, 0.10);
+  border: 1px solid rgba(242, 101, 34, 0.22);
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+
+.upsellTitle {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin: 0 0 14px;
+  color: var(--navy);
+}
+
+.upsellLead {
+  font-size: 16px;
+  color: #44444f;
+  margin: 0 0 24px;
+  line-height: 1.65;
+}
+
+.upsellPoints {
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+.upsellPoint {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--navy);
+  font-weight: 500;
+  padding: 11px 0;
+  border-top: 1px solid #e7e5e0;
+}
+
+.upsellPoint:last-child {
+  border-bottom: 1px solid #e7e5e0;
+}
+
+.upsellTick {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(242, 101, 34, 0.12);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 1px;
+}
+
+.upsellCtaPrimary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  text-decoration: none;
+  padding: 17px 24px;
+  border-radius: 30px;
+  box-shadow: 0 10px 26px rgba(242, 101, 34, 0.30);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  font-family: inherit;
+}
+
+.upsellCtaPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(242, 101, 34, 0.38);
+}
+
+.upsellCtaSecondary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  padding: 15px 24px;
+  border-radius: 30px;
+  border: 1.5px solid var(--navy);
+  margin-top: 12px;
+  transition: background 0.12s ease, color 0.12s ease;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.upsellCtaSecondary:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+.upsellCtaSecondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.upsellConfirm {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #2e7d32;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.upsellOptout {
+  text-align: center;
+  font-size: 13px;
+  color: #8a8a96;
+  margin: 20px 0 0;
+  line-height: 1.6;
+}
+
+.upsellFoot {
+  text-align: center;
+  font-size: 12px;
+  color: #8a8a96;
+  margin-top: 20px;
 }
 
 /* ===== Animations ===== */
@@ -689,6 +871,7 @@
   .hero { padding: 60px 20px 70px; }
   .belowHero { padding: 20px; }
   .content { padding: 40px 16px 80px; }
+  .upsellContent { padding: 0 0 40px; }
   .videoLabel { padding: 20px; }
   .sectionIntro { padding: 40px 24px; }
   .questionsPanel { padding: 28px 24px 0; }
@@ -697,5 +880,9 @@
   .progressStepLabel { display: none; }
   .aboveFormInner { flex-direction: column; text-align: center; }
   .errorBanner { margin: 0 24px 16px; }
-  .successScreen { padding: 48px 24px; }
+  .upsellHero { padding: 26px 22px 44px; }
+  .upsellCardWrap { padding: 0 12px 32px; }
+  .upsellCard { padding: 30px 22px 28px; }
+  .upsellHeroTitle { font-size: 26px; }
+  .upsellTitle { font-size: 22px; }
 }
