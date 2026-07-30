@@ -6,13 +6,38 @@ import {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Answer fields (q2-q12). Identity fields (Full Name, Email, Company) are
+// deliberately excluded: they can be populated while every answer is blank,
+// and a recap with no answers reads as "everything you told us" over nothing.
+const ANSWER_FIELDS = [
+  "Business Description",
+  "Ideal Client",
+  "Discovery Questions",
+  "Top 3 Obstacles",
+  "Solutions to Obstacles",
+  "Differentiators",
+  "Client Results",
+  "Most Recognized Client",
+  "Lead Offer",
+  "Offer Improvements",
+  "Additional Notes",
+];
+
 // Guards double-sends from client retries that land on the same warm
 // instance. Cross-instance retries are not covered — there is no persistent
 // store here, and each retry creates a fresh Airtable record anyway.
 const recentRecapSends = new Map();
 const RECAP_DEDUPE_WINDOW_MS = 5 * 60 * 1000;
 
-async function sendRecapEmail(fields) {
+async function sendRecapEmail(fields, recordId) {
+  const hasAnswers = ANSWER_FIELDS.some(
+    (key) => typeof fields[key] === "string" && fields[key].trim().length > 0
+  );
+  if (!hasAnswers) {
+    console.warn("Recap email skipped: no answer fields have content, record", recordId);
+    return;
+  }
+
   const to = (fields["Email"] || "").trim();
   if (!EMAIL_RE.test(to)) {
     console.error(
@@ -137,7 +162,7 @@ export async function POST(request) {
   // and a failed email must never surface as a failed form submission.
   if (process.env.BREVO_API_KEY) {
     try {
-      await sendRecapEmail(fields);
+      await sendRecapEmail(fields, result.id);
     } catch (err) {
       console.error("Recap email failed (non-blocking):", err);
     }
